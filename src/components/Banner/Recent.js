@@ -1,13 +1,59 @@
 import React from 'react'
-import styled from 'styled-components'
 import { graphql, useStaticQuery } from 'gatsby'
 import { Link } from 'gatsby'
 import Image from 'gatsby-image'
+
+import styled from 'styled-components'
 import Title from './Title'
-// ...GatsbyImageSharpFluid
+
+const query = graphql`
+  {
+    allMdx(sort: {fields: frontmatter___date, order: DESC}, limit: 5) {
+      nodes {
+        frontmatter {
+          title
+          date(formatString: "YYYY年MM月DD日")
+          slug
+          image {
+            childImageSharp {
+              fluid {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
+        }
+        id
+      }
+    }
+  }
+`
 
 const Recent = () => {
-  return <Wrapper>Banner Recent</Wrapper>
+  const data = useStaticQuery(query)
+  const {
+    allMdx:{nodes: posts},
+  } = data
+  return <Wrapper>
+    <Title title="最近の投稿" />
+    {posts.map(post => {
+      const {
+        title, 
+        slug, 
+        date, 
+        image:{
+          childImageSharp: {fluid}
+        }
+      } = post.frontmatter
+      return <Link to={`/posts/${slug}`} key={post.id} className="post">
+        <Image fluid={fluid} className="img"></Image>
+        <div>
+          <h5>{title}</h5>
+          <p>{date}</p>
+        </div>
+      </Link>
+
+    })}
+  </Wrapper>
 }
 
 const Wrapper = styled.div`
