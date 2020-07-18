@@ -1,8 +1,9 @@
 import React from 'react'
+import { IoMdClose } from 'react-icons/io'
 
 import Links from '../constants/links'
 import Categories from '../components/Categories'
-import { IoMdClose } from 'react-icons/io'
+
 
 const Sidebar = ({isOpen, toggle}) => {
   return <aside className={`sidebar ${isOpen ? 'showSidebar' : ''}`}>
@@ -10,7 +11,9 @@ const Sidebar = ({isOpen, toggle}) => {
       <IoMdClose />
     </button>
     <div className="sidebar-container">
-      <Links styleClass="sidebar-links" />
+      <Links styleClass="sidebar-links">
+        <Categories />
+      </Links>
     </div>
   </aside>
 }
