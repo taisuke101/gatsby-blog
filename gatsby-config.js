@@ -26,12 +26,12 @@ module.exports = {
     //     gatsbyRemarkPlugins: [{ resolve: 'gatsby-remark-images' }],
     //   },
     // },
-    {
-      resolve: `gatsby-source-instagram`,
-      options: {
-        username: `yasuken_enjoy`,
-      },
-    },
+    // {
+    //   resolve: `gatsby-source-instagram`,
+    //   options: {
+    //     username: `yasuken_enjoy`,
+    //   },
+    // },
     {
       resolve: `gatsby-plugin-prefetch-google-fonts`,
       options: {
